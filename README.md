@@ -85,29 +85,42 @@ This repository also provides an Agent Skill that helps an agent write a manuscr
 
 It depends on Posit's [`quarto-authoring`](https://github.com/posit-dev/skills/tree/main/quarto/quarto-authoring) skill for general Quarto syntax and features, so install both skills.
 
-This skill focuses on Quarto structure and rendering rather than the quality of the scientific argument or prose. For reader-focused writing support, use it alongside a writing skill such as [Reader-Aware-Writing](https://github.com/xchuam/Reader-Aware-Writing).
+This skill focuses on Quarto structure and rendering rather than the quality of the scientific argument or prose. For scientific writing support, use it alongside a writing skill such as [Reader-Aware-Writing](https://github.com/xchuam/Reader-Aware-Writing).
 
 ### Install for Codex and Claude Code
 
-{this section is too complex!}
+Install both `paper-writing-with-quarto` and its required companion skill, `quarto-authoring`.
 
-Install [Node.js](https://nodejs.org/en/download) first. Then open a terminal in the downloaded `paper-writing-with-quarto` repository root and run:
+#### Codex
 
-```bash
-npx --yes skills add . --skill paper-writing-with-quarto --agent codex --agent claude-code --yes --copy
-npx --yes skills add posit-dev/skills --skill quarto-authoring --agent codex --agent claude-code --yes --copy
+Run each line as a separate message in Codex:
+
+```text
+$skill-installer install https://github.com/posit-dev/skills/tree/main/quarto/quarto-authoring
+$skill-installer install the root skill from https://github.com/xchuam/paper-writing-with-quarto
 ```
 
-These commands use the [skills.sh CLI](https://www.skills.sh/docs/cli) to install both skills for this project. Run Codex or Claude Code from the repository root. Consult the skills.sh documentation if you prefer a user-wide installation.
+Restart Codex if the skills do not appear immediately. Invoke the manuscript skill as `$paper-writing-with-quarto`.
 
-In Codex, check `/skills` and invoke the skill as `$paper-writing-with-quarto`. For example:
+#### Claude Code
 
-> Use $paper-writing-with-quarto to copy the manuscript template into a folder named my-paper, replace the author placeholders with the information I provide, and render the DOCX.
+Install [Node.js](https://nodejs.org/en/download), open a terminal in your manuscript project, and run:
 
-See OpenAI's [skill documentation](https://learn.chatgpt.com/docs/build-skills) for Codex skill discovery and use.
+```bash
+npx skills add xchuam/paper-writing-with-quarto --skill paper-writing-with-quarto --agent claude-code
+npx skills add posit-dev/skills --skill quarto-authoring --agent claude-code
+```
 
-In Claude Code, invoke the skill as `/paper-writing-with-quarto`. For example:
+These commands use [skills.sh](https://www.skills.sh/docs/cli). Invoke the manuscript skill as `/paper-writing-with-quarto`. For another skills.sh-compatible agent, replace `claude-code` with that agent's name.
 
-> /paper-writing-with-quarto Add the supplied bibliography entries, table, and figure to my manuscript. Check citations and cross-references before rendering the DOCX.
+### Use the Skill
 
-See Anthropic's [Claude Code skills documentation](https://code.claude.com/docs/en/skills) for skill discovery and use.
+Tell the agent what you want to write and provide the available manuscript information, such as the title, authors, affiliations, target journal, outline, references, tables, and figures. The agent should ask for important missing information rather than inventing scientific content.
+
+For example, in Codex:
+
+```text
+Use $paper-writing-with-quarto to create a manuscript from the bundled template. Use the title, authors, affiliations, outline, references, tables, and figures I provide. Keep all resources together, report missing information or unresolved citations, and render the manuscript to DOCX when it is ready.
+```
+
+You can also use the skill to revise an existing `manuscript.qmd`, diagnose a rendering error, or adapt the CSL and reference DOCX for a target journal.
