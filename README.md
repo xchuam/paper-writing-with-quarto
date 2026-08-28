@@ -1,5 +1,9 @@
 # Paper Writing with Quarto
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Skills](https://img.shields.io/badge/skills.sh-Compatible-green)](https://skills.sh)
+[![GitHub stars](https://img.shields.io/github/stars/xchuam/paper-writing-with-quarto?style=social)](https://github.com/xchuam/paper-writing-with-quarto)
+
 This repository provides:
 
 - a complete Quarto template for writing a scientific manuscript and rendering it to Microsoft Word; and
@@ -124,3 +128,7 @@ Use $paper-writing-with-quarto to create a manuscript from the bundled template.
 ```
 
 You can also use the skill to revise an existing `manuscript.qmd`, diagnose a rendering error, or adapt the CSL and reference DOCX for a target journal.
+
+## License
+
+This project is released under the [MIT License](LICENSE).
